@@ -1,19 +1,18 @@
 def sqrt(x):
 
-    def sqrt_iter(guess, x):
-        if good_enough(guess, x):
+    def sqrt_iter(guess):
+        if good_enough(guess):
             return guess
-        return sqrt_iter(improve(guess, x), x)
+        return sqrt_iter(improve(guess))
 
-    def improve(guess, x):
+    def improve(guess):
         return average(guess, (x / guess))
 
-    def average(x, y):
-        return (x + y) / 2
-
-    def good_enough(guess, x):
+    def good_enough(guess):
         return abs(guess**2 - x) < 0.001
 
-    return sqrt_iter(1.0, x)
+    return sqrt_iter(1.0)
 
+def average(x, y):
+        return (x + y) / 2
 
