@@ -13,6 +13,6 @@ def sqrt(x):
 
     return sqrt_iter(1.0)
 
-def average(x, y):
-        return (x + y) / 2
 
+def average(x, y):
+    return (x + y) / 2
