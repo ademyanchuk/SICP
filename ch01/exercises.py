@@ -1,5 +1,8 @@
 #! /usr/local/bin/python3
 
+def square(x):
+    return x*x
+
 # tree recursion
 def f(n):
     if n < 3:
@@ -58,3 +61,42 @@ def pascal_v1(n):
     for i in range(n):
         result = next(gen)
     return result
+
+def expt(b,n):
+    if n == 0:
+        return 1
+    else:
+        return b * expt(b, n-1)
+
+def expt_v1(b,n):
+    return expt_iter(b,n,1)
+
+def expt_iter(b,counter,product):
+    while counter > 0:
+        product *= b
+        counter -= 1
+    return product
+
+def fast_expt(b,n):
+    if n == 0:
+        return 1
+    elif n % 2 == 0:
+        return square(fast_expt(b, n//2))
+    else:
+        return b * fast_expt(b, n - 1)
+
+# TODO iterative process log(n) time
+def fast_expt_iter(b,n):
+    if n == 1:
+        return b
+    a = 1
+    while n > 0:
+        if n % 2 == 0:
+            a = a * (b*b)
+            n = n//2
+        else:
+            if n == 1:
+                break
+            a = a * b
+            n = n - 1
+    return a
