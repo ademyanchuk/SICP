@@ -85,18 +85,16 @@ def fast_expt(b,n):
     else:
         return b * fast_expt(b, n - 1)
 
-# TODO iterative process log(n) time
+# iterative process log(n) time
 def fast_expt_iter(b,n):
-    if n == 1:
+    if b == 1 or b == 0:
         return b
     a = 1
     while n > 0:
         if n % 2 == 0:
-            a = a * (b*b)
+            b = b*b
             n = n//2
         else:
-            if n == 1:
-                break
             a = a * b
             n = n - 1
     return a
