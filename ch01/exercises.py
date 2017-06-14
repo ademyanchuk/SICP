@@ -98,3 +98,42 @@ def fast_expt_iter(b,n):
             a = a * b
             n = n - 1
     return a
+
+# ex 1.17 linear multiplication
+def mult(a,b):
+    result = 0
+    while b > 0:
+        result += a
+        b -= 1
+    return result
+
+# ex 1.17 -- multiplication in logarithmic time
+def double(integer):
+    return integer + integer
+
+def halve(even_integer):
+    return int(even_integer / 2)
+
+def isEven(integer):
+    return integer%2 == 0
+
+# recursive process
+def multiply(integer_a, integer_b):
+    if integer_b == 0:
+        return 0
+    elif isEven(integer_b):
+        return multiply(double(integer_a), halve(integer_b))
+    else:
+        return integer_a + multiply(integer_a, integer_b-1)
+
+# the same but iterative process
+def multiply_iter(integer_a, integer_b):
+    result = 0
+    while integer_b > 0:
+        if isEven(integer_b):
+            integer_a = double(integer_a)
+            integer_b = halve(integer_b)
+        else:
+            result += integer_a
+            integer_b -= 1
+    return result
