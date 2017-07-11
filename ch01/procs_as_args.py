@@ -18,6 +18,26 @@ def summ(term, a, nxt, b):
         return 0
     else:
         return term(a) + summ(term, nxt(a), nxt, b)
+
+# Same  procedure, but iterative.
+def sum_iter(term, a, nxt, b):
+    result = 0
+    while a <= b:
+        result += term(a)
+        a = nxt(a)
+    return result
+
+# Abstract product procedure
+def product(term, a, nxt, b):
+    if a > b:
+        result = 0
+    else:
+        result = term(a)
+    while a < b:
+        a = nxt(a)
+        result *= term(a)
+    return result
+
 # Example of using high abstraction to create sum_cubes again
 
 def cube(x):
@@ -26,8 +46,11 @@ def cube(x):
 def inc(n):
     return n+1
 
+def ident(a):
+    return a
+
 def sum_cubes_high(a, b):
-    return summ(cube, a, inc, b)
+    return sum_iter(cube, a, inc, b)
 
 # Another example of using high abstraction
 
@@ -38,3 +61,10 @@ def pi_sum_high(a,b):
         return x+4
 
     return summ(pi_term, a, pi_next, b)
+
+# Factorial using product
+def factorial(x):
+    if x == 0:
+        return 1
+    else:
+        return product(ident, 1, inc, x)
