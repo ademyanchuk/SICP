@@ -38,6 +38,21 @@ def product(term, a, nxt, b):
         result *= term(a)
     return result
 
+# Higher abstraction - accumulation
+def accumulate(combiner, null_value, term, a, nxt, b):
+    if a > b:
+        result = null_value
+    else:
+        result = term(a)
+    while a < b:
+        a = nxt(a)
+        result = combiner(result, term(a))
+        print(result)
+    return result
+
+def sum_from_accum(term, a, nxt, b):
+    return accumulate(add, 0, term, a, nxt, b)
+
 # Example of using high abstraction to create sum_cubes again
 
 def cube(x):
@@ -48,6 +63,12 @@ def inc(n):
 
 def ident(a):
     return a
+
+def mult(a, b):
+    return a*b
+
+def add(a ,b):
+    return a + b
 
 def sum_cubes_high(a, b):
     return sum_iter(cube, a, inc, b)
