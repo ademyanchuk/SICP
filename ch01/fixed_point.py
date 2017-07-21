@@ -8,9 +8,16 @@ def fixed_point(f, first_guess):
 
     def tryy(guess):
         nxt = f(guess)
+        print("Приближение: {}".format(nxt))
         if close_enough(guess, nxt):
             return nxt
         else:
             return tryy(nxt)
 
     return tryy(first_guess)
+
+def sqrt(x):
+    return fixed_point(lambda y: (y + x/y)/2, 1.0)
+
+def average_dump(f):
+    return lambda x: (x + f(x))/2
