@@ -1,5 +1,6 @@
 #! /usr/local/bin/python3
-TOLERANCE = 0.00001
+TOLERANCE = 0.0000001
+dx = TOLERANCE
 
 def fixed_point(f, first_guess):
 
@@ -17,7 +18,15 @@ def fixed_point(f, first_guess):
     return tryy(first_guess)
 
 def sqrt(x):
-    return fixed_point(lambda y: (y + x/y)/2, 1.0)
+    return fixed_point(average_dump(lambda y: x/y), 1.0)
 
 def average_dump(f):
     return lambda x: (x + f(x))/2
+
+# derivate via limit
+def deriv (g):
+    return lambda x: (g(x + dx) - g(x))/ dx
+
+def cube(x):
+    return x*x*x
+
