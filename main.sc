@@ -32,13 +32,21 @@
   (and (pair? x) (eq? (car x) '+)))
 
 (define (addend s) (cadr s))
-(define (augend s) (caddr s))
+
+(define (augend s)
+  (if (> (length s) 3)
+      (cons '+ (cddr s))
+      (caddr s)))
 
 (define (product? x)
   (and (pair? x) (eq? (car x) '*)))
 
 (define (multiplier p) (cadr p))
-(define (multiplicand p) (caddr p))
+
+(define (multiplicand s)
+  (if (> (length s) 3)
+      (cons '* (cddr s))
+      (caddr s)))
 
 (define (exponentiation? x)
   (and (pair? x) (eq? (car x) '**)))
@@ -68,5 +76,5 @@
           (else
             (error "неизвестный тип выражения -- DERIV" exp))))
 
-(display (deriv '(** x 2) 'x))
+(display (deriv '(* (** x 2) (** x 3) (** x 4)) 'x))
 (newline)
